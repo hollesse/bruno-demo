@@ -1,0 +1,23 @@
+meta {
+  name: Delete a Todo
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{base_url}}/todos/{{id}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+vars:pre-request {
+  id: {{latest_todo_id}}
+}
+
+assert {
+  res.status: eq 200
+}

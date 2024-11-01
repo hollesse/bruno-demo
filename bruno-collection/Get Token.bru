@@ -1,0 +1,36 @@
+meta {
+  name: Get Token
+  type: http
+  seq: 2
+}
+
+post {
+  url: 
+  body: none
+  auth: oauth2
+}
+
+headers {
+  Content-Type: application/x-www-form-urlencoded
+}
+
+auth:oauth2 {
+  grant_type: password
+  access_token_url: {{base_url}}/token
+  username: {{oauth2_username}}
+  password: {{oauth2_password}}
+  client_id: {{oauth2_clientid}}
+  client_secret: 
+  scope: 
+}
+
+assert {
+  res.status: eq 200
+  res.body.access_token: isDefined
+}
+
+script:post-response {
+  if(req.getAuthMode() == 'oauth2' && res.body.access_token) {
+      bru.setVar('access_token', res.body.access_token);
+  }
+}

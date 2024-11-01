@@ -1,0 +1,38 @@
+meta {
+  name: Add a Todo
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/todos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:json {
+  {
+    "title": "{{title}}"
+  }
+}
+
+vars:pre-request {
+  title: Clean the car
+}
+
+assert {
+  res.status: eq 200
+  res.body.title: eq {{title}}
+  res.body.id: isNumber
+  res.body.completed: eq false
+}
+
+script:post-response {
+  if (res.status == 200 && res.body.id){
+    bru.setVar("latest_todo_id",res.body.id)
+  }
+}

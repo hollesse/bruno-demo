@@ -1,0 +1,20 @@
+meta {
+  name: Mark Todo as completed
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{base_url}}/todos/{{id}}/complete
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  id: {{latest_todo_id}}
+}
+
+assert {
+  res.status: eq 200
+  res.body.completed: eq true
+}

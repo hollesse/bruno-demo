@@ -1,0 +1,19 @@
+meta {
+  name: Get All Todos
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{base_url}}/todos
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+assert {
+  res.status: eq 200
+}

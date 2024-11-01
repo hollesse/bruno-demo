@@ -1,0 +1,37 @@
+{
+  "realm": "todo",
+  "enabled": true,
+  "accessTokenLifespan": 3600,
+  "clients": [
+    {
+      "clientId": "todo-app-local",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "redirectUris": ["http://localhost/*"],
+      "directAccessGrantsEnabled": true
+    }
+  ],
+  "users": [
+    {
+      "username": "todo-user-local",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password-local",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["user"]
+    }
+  ],
+  "roles": {
+    "realm": [
+      {
+        "name": "user",
+        "description": "Standardbenutzerrolle"
+      }
+    ]
+  }
+}
