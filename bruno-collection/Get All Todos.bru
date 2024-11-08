@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: {{base_url}}/todos
+  url: {{base_url}}/todos?open
   body: none
   auth: bearer
+}
+
+params:query {
+  open: 
 }
 
 auth:bearer {
