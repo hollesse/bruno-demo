@@ -1,0 +1,19 @@
+meta {
+  name: Mark todo as completed
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{base_url}}/todos/{{id}}/complete
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+vars:pre-request {
+  id: {{latest_todo_id}}
+}

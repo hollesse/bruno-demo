@@ -1,5 +1,5 @@
 meta {
-  name: Add a Todo
+  name: Add a todo
   type: http
   seq: 3
 }
@@ -21,18 +21,18 @@ body:json {
 }
 
 vars:pre-request {
-  title: Clean the car
+  title: Clean the Car
 }
 
 assert {
   res.status: eq 200
   res.body.title: eq {{title}}
-  res.body.id: isNumber
+  res.body.id: isNumber 
   res.body.completed: eq false
 }
 
 script:post-response {
-  if (res.status == 200 && res.body.id){
-    bru.setVar("latest_todo_id",res.body.id)
+  if (res.status == 200 && res.body.id) {
+    bru.setVar("latest_todo_id", res.body.id)
   }
 }

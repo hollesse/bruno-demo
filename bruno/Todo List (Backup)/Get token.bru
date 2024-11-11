@@ -1,0 +1,27 @@
+meta {
+  name: Get token
+  type: http
+  seq: 2
+}
+
+post {
+  url: 
+  body: none
+  auth: oauth2
+}
+
+auth:oauth2 {
+  grant_type: password
+  access_token_url: {{base_url}}/token
+  username: {{username}}
+  password: {{password}}
+  client_id: {{client_id}}
+  client_secret: 
+  scope: 
+}
+
+script:post-response {
+  if(req.getAuthMode() == 'oauth2' && res.body.access_token) {
+           bru.setVar('access_token', res.body.access_token);
+        }
+}

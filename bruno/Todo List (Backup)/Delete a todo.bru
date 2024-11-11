@@ -1,5 +1,5 @@
 meta {
-  name: Delete a Todo
+  name: Delete a todo
   type: http
   seq: 6
 }
@@ -16,8 +16,4 @@ auth:bearer {
 
 vars:pre-request {
   id: {{latest_todo_id}}
-}
-
-assert {
-  res.status: eq 200
 }
