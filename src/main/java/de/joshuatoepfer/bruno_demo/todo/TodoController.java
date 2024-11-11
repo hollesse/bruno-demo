@@ -14,13 +14,11 @@ public class TodoController {
     this.todoRepository = todoRepository;
   }
 
-  // Todos anlegen
   @PostMapping
-  public Todo createTodo(@RequestBody Todo todo) {
+  public Todo addTodo(@RequestBody Todo todo) {
     return todoRepository.save(todo);
   }
 
-  // Liste von Todos anzeigen
   @GetMapping
   public List<Todo> getAllTodos(@RequestParam(name = "open", required = false) String open) {
     if (open != null) {
@@ -29,7 +27,6 @@ public class TodoController {
     return todoRepository.findAll();
   }
 
-  // Todo löschen
   @DeleteMapping("/{id}")
   public ResponseEntity<?> deleteTodo(@PathVariable Long id) {
     return todoRepository
@@ -42,7 +39,6 @@ public class TodoController {
         .orElse(ResponseEntity.notFound().build());
   }
 
-  // Todo als erledigt markieren
   @PutMapping("/{id}/complete")
   public ResponseEntity<Todo> completeTodo(@PathVariable Long id) {
     return todoRepository
